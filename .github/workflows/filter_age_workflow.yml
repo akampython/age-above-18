@@ -1,0 +1,34 @@
+name: Filter Age
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  filter-age:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas openpyxl
+
+      - name: Run age filter script
+        run: |
+          python scripts/filter_age.py
+          
+      - name: Upload filtered output
+        uses: actions/upload-artifact@v2
+        with:
+          name: filtered_age_output
+          path: output/filtered_age_output.xlsx
