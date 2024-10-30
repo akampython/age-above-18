@@ -23,10 +23,20 @@ jobs:
         run: |
           pip install pandas openpyxl
 
+      - name: Create output directory
+        run: mkdir -p output
+
       - name: Run age filter script
         run: |
           python scripts/filter_age.py
           
+      - name: Verify output file exists
+        run: |
+          if [ ! -f output/filtered_age_output.xlsx ]; then
+            echo "Error: output file not found!"
+            exit 1
+          fi
+
       - name: Upload filtered output
         uses: actions/upload-artifact@v3
         with:
