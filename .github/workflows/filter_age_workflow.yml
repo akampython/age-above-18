@@ -28,7 +28,7 @@ jobs:
           python scripts/filter_age.py
           
       - name: Upload filtered output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: filtered_age_output
           path: output/filtered_age_output.xlsx
